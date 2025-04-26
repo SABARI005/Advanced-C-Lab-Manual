@@ -1,5 +1,5 @@
-EXP NO:6 C PROGRAM PRINT THE LOWERCASE ENGLISH WORD CORRESPONDING TO THE NUMBER
-Aim:
+### EXP NO:6 C PROGRAM PRINT THE LOWERCASE ENGLISH WORD CORRESPONDING TO THE NUMBER
+## Aim:
 To write a C program print the lowercase English word corresponding to the number
 Algorithm:
 1.	Start
@@ -14,24 +14,50 @@ Algorithm:
 -	Default: Print "Greater than 13"
 4.	Exit the program.
  
-Program:
+## Program:
+```
+#include <stdio.h>
 
-//type your code here
+int main() {
+    int n;
+    printf("Enter a number: ");
+    scanf("%d", &n);
+
+    switch(n) {
+        case 5:
+            printf("seventy one\n");
+            break;
+        case 6:
+            printf("seventy two\n");
+            break;
+        case 13:
+            printf("seventy three\n");
+            break;
+        default:
+            printf("Greater than 13\n");
+    }
+
+    return 0;
+}
+```
 
 
 
 
-Output:
 
 
-//paste your output here
+## Output:
+
+
+![image](https://github.com/user-attachments/assets/e99df3e2-10e5-4762-b5c4-8edc9981181d)
 
 
 
 
 
 
-Result:
+
+## Result:
 Thus, the program is verified successfully
  
 EXP NO:7 C PROGRAM TO PRINT TEN SPACE-SEPARATED INTEGERS     IN A SINGLE  LINE DENOTING THE FREQUENCY OF EACH DIGIT FROM 0 TO 3 .
@@ -45,31 +71,55 @@ Algorithm:
 5.	Increment h to move to the next digit
 6.	End
  
-Program:
+## Program:
+```
+#include <stdio.h>
 
-//type your code here
+int main() {
+    char a[50];
+    int c, h, i;
+
+    printf("Enter a string: ");
+    scanf("%s", a);
+
+    for (h = 0; h <= 3; h++) {
+        c = 0;
+        for (i = 0; a[i] != '\0'; i++) {
+            if (a[i] == '0' + h) {
+                c++;
+            }
+        }
+        printf("%d ", c);
+    }
+
+    return 0;
+}
+
+```
 
 
 
 
-Output:
 
-
-//paste your output here
-
-
+## Output:
+![image](https://github.com/user-attachments/assets/8b2ef7a2-5ea1-4ef5-9232-43eff4cf652b)
 
 
 
 
-Result:
+
+
+
+
+
+## Result:
 Thus, the program is verified successfully
 
-EXP NO:8 C PROGRAM TO PRINT ALL OF ITS PERMUTATIONS IN STRICT LEXICOGRAPHICAL ORDER.
-Aim:
+### EXP NO:8 C PROGRAM TO PRINT ALL OF ITS PERMUTATIONS IN STRICT LEXICOGRAPHICAL ORDER.
+## Aim:
 To write a C program to print all of its permutations in strict lexicographical order.
 
-Algorithm:
+## Algorithm:
 1.	Start
 2.	Declare variables s (pointer to an array of strings) and n (number of strings)
 
@@ -82,31 +132,78 @@ Read the number of strings n from the user Dynamically allocate memory for each 
 Free the memory allocated for each string in s Free the memory allocated for s
 7.	End
  
-Program:
+## Program:
+```
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-//type your code here
+int compare(const void *a, const void *b) {
+    return *(char *)a - *(char *)b;
+}
+
+void swap(char *x, char *y) {
+    char temp = *x;
+    *x = *y;
+    *y = temp;
+}
+
+int next_permutation(char *str, int len) {
+    int i = len - 2;
+    while (i >= 0 && str[i] >= str[i + 1]) i--;
+    if (i < 0) return 0;
+
+    int j = len - 1;
+    while (str[j] <= str[i]) j--;
+
+    swap(&str[i], &str[j]);
+    qsort(str + i + 1, len - i - 1, sizeof(char), compare);
+    return 1;
+}
+
+int main() {
+    char *s;
+    int n;
+
+    printf("Enter the string: ");
+    s = (char *)malloc(100 * sizeof(char));
+    scanf("%s", s);
+
+    int len = strlen(s);
+    qsort(s, len, sizeof(char), compare);
+
+    do {
+        printf("%s\n", s);
+    } while (next_permutation(s, len));
+
+    free(s);
+    return 0;
+}
+```
 
 
 
 
-Output:
 
 
-//paste your output here
+## Output:
+
+![image](https://github.com/user-attachments/assets/635c8623-a397-43f7-a176-1fb0ff0e107a)
 
 
 
 
 
 
-Result:
+
+
+## Result:
 Thus, the program is verified successfully
  
-EXP NO:9 C PROGRAM PRINT A PATTERN OF NUMBERS FROM 1 TO N AS
-SHOWN BELOW.
-Aim:
+ ### EXP NO:9 C PROGRAM PRINT A PATTERN OF NUMBERS FROM 1 TO N AS SHOWN BELOW.
+## Aim:
 To write a C program to print a pattern of numbers from 1 to n as shown below.
-Algorithm:
+## Algorithm:
 1.	Start
 2.	Declare integer variables n, i, j, min
 3.	Read the value of n from the user
@@ -115,33 +212,58 @@ Algorithm:
 6.	Calculate min as the minimum distance to the borders
 7.	End
  
-Program:
+## Program:
+```
+#include <stdio.h>
 
-//type your code here
+int main() {
+    int n, i, j, min, len;
+
+    printf("Enter a value for n: ");
+    scanf("%d", &n);
+
+    len = n * 2 - 1;
+
+    for (i = 0; i < len; i++) {
+        for (j = 0; j < len; j++) {
+            min = i < j ? i : j;
+            min = min < len - i - 1 ? min : len - i - 1;
+            min = min < len - j - 1 ? min : len - j - 1;
+            printf("%d ", n - min);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+
+```
 
 
 
 
-Output:
-
-
-//paste your output here
-
+## Output:
+![image](https://github.com/user-attachments/assets/08b6f404-516e-4e64-9ca0-5adc6a1df42f)
 
 
 
 
 
-Result:
+
+
+
+
+
+## Result:
 Thus, the program is verified successfully
 
-EXP NO:10 C PROGRAM TO FIND A SQUARE  OF NUMBER USING FUNCTION WITHOUT ARGUMENTS WITH RETURN TYPE
+## EXP NO:10 C PROGRAM TO FIND A SQUARE  OF NUMBER USING FUNCTION WITHOUT ARGUMENTS WITH RETURN TYPE
 
-Aim:
+## Aim:
 
 To write a C program that calculates the square of a number using a function that does not take any arguments, but returns the square of the number.
 
-Algorithm:
+## Algorithm:
 
 1.	Start.
 2.	Define a function square() with no parameters. This function will return an integer value.
@@ -154,24 +276,41 @@ o	Return the squared value.
 o	Call the square() function and display the result.
 5.	End.
 
-Program:
+## Program:
 
-//type your code here
+```
+#include <stdio.h>
+
+int square() {
+    int num;
+    printf("Enter a number: ");
+    scanf("%d", &num);
+    return num * num;
+}
+
+int main() {
+    int result;
+    result = square();
+    printf("Square: %d\n", result);
+    return 0;
+}
+
+```
 
 
 
 
-Output:
+## Output:
 
 
-//paste your output here
-
-
-
+![image](https://github.com/user-attachments/assets/7e17977d-bf13-4d00-9bd2-4707689a230b)
 
 
 
-Result:
+
+
+
+## Result:
 Thus, the program is verified successfully
 
 
